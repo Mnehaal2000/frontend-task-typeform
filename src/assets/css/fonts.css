@@ -1,0 +1,12 @@
+
+/* fonts.css */
+@font-face {
+  font-family: 'ApercuPro';
+  src: url('/src/assets/fonts/apercu-pro-cufonfonts/apercu_regular_pro.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'ApercuPro', -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+}

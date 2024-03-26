@@ -1,0 +1,29 @@
+/* tailwind initialize */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* font import */
+@import url('./assets/css/fonts.css');
+
+.Mui-focused {
+  --Input-focusedHighlight: black !important;
+}
+
+.css-1c0wwi7:hover {
+  background-color: black !important;
+}
+
+.Mui-checked.css-1t03pob  {
+  background-color: black !important;
+}
+
+.Mui-checked.css-1nvwadr {
+  background-color: black !important;
+}
+
+.MuiRadio-icon {
+  width: 8px !important;
+  height: 8px !important;
+  background-color: white !important;
+}
