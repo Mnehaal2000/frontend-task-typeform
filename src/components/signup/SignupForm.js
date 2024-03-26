@@ -8,6 +8,8 @@ export default function InputFormProps() {
   const [emailError, setEmailError] = React.useState('');
   const [passwordError, setPasswordError] = React.useState('');
   const [showPassword, setShowPassword] = React.useState(false);
+  const [checkboxChecked, setCheckboxChecked] = React.useState(false);
+  const [termsError, setTermsError] = React.useState('');
 
   // email validation when entered and constant listening plus checking after the user has moved on from the input
   const validateEmail = (email) => {
@@ -48,11 +50,22 @@ export default function InputFormProps() {
   const handlePasswordBlur = (event) => {
     const password = event.target.value;
     if (password.trim() === '') {
-      setPasswordError('This field cannot be left blank');//message to be showed to the user
-    } else if (passwordError === '') {
-      setPasswordError('Incorrect password');//message to be showed to the user
+      setPasswordError('This field cannot be left blank');
+    } else if (password.length < 8) {
+      setPasswordError('Use 8 or more characters with a mix of letters, numbers and symbols');//message to be showed to the user
     }
   };
+
+  const handleCheckboxChange = () => {
+    setCheckboxChecked(!checkboxChecked);
+    setTermsError(''); // Clear terms error when checkbox is changed
+  };
+
+  const handleSubmit=()=> {
+    if(checkboxChecked !== true) {
+      setTermsError('Please accept the terms and conditions to finish the signup');
+    }
+  }
 
   const [showOptions, setShowOptions] = React.useState(false);
 
@@ -100,6 +113,8 @@ export default function InputFormProps() {
           </FormControl>
 
           <Checkbox
+            checked={checkboxChecked}
+            onChange={handleCheckboxChange}
             disabled={false}
             label={
               <span>
@@ -109,6 +124,7 @@ export default function InputFormProps() {
             size="md"
             sx={{fontSize:'14px ', marginBottom:'16px'}}
           />
+          {termsError && <FormHelperText sx={{color:'#c13b2f', fontSize:'14px', paddingY:'8px', marginTop:'0'}}><Info fontSize='sm'/>{termsError}</FormHelperText>} {/* Show terms error */}
 
           <div className=' flex flex-col pl-[30px] pb-4 pt-2 w-full'>
             <div className=' w-full flex justify-between items-center text-sm h-[32px] pr-2 cursor-pointer' onClick={toggleOptions}>
@@ -151,7 +167,7 @@ export default function InputFormProps() {
             )}
           </div>
 
-          <Button fullWidth type="submit" sx={{backgroundColor:'#191919', maxWidth:'230px', borderRadius:'3px', height:'40px', fontSize:'16px', minWidth:'100%'}}>Create My Free Account</Button>
+          <Button fullWidth onClick={handleSubmit} type="submit" sx={{backgroundColor:'#191919', maxWidth:'230px', borderRadius:'3px', height:'40px', fontSize:'16px', minWidth:'100%'}}>Create My Free Account</Button>
         </div>
       </form>
     </div>
